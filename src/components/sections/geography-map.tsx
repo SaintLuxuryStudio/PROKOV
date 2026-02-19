@@ -30,13 +30,14 @@ export default function GeographyMap({
 }: {
   onSelectIncident: (id: string) => void;
 }) {
-  // Slightly jitter points 4-9 to avoid a perfect line while keeping westward drift
+  // Stable jitter for points 4-9 to avoid a perfect line while keeping westward drift (deterministic to avoid hydration mismatch)
   const jittered = useMemo(
     () =>
       parisLocations.map((loc, i) => {
         if (i < 3) return loc;
-        const latJitter = (Math.random() - 0.5) * 0.008; // ~0.008 deg lat ≈ <1km
-        const lngJitter = (Math.random() - 0.5) * 0.06;  // more spread west/east ≈ ~4km
+        // deterministic pseudo-random based on index to keep SSR === client
+        const latJitter = ((i * 137) % 100 - 50) * 0.00016; // ~[-0.008, 0.008]
+        const lngJitter = ((i * 263) % 100 - 50) * 0.0012; // ~[-0.06, 0.06]
         return {
           ...loc,
           lat: loc.lat + latJitter,

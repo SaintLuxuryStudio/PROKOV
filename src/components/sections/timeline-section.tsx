@@ -83,7 +83,7 @@ export function TimelineSection({
   const activeIncident = caseData.incidents[activeIndex];
 
   return (
-    <motion.section id="timeline" className="mt-12" {...sectionAnimation}>
+    <motion.section id="timeline" className="mt-12" initial={{ opacity: 1, y: 0 }} animate={{ opacity: 1, y: 0 }}>
       <SectionTitle
         title="Таймлайн эскалации"
         subtitle="Скролл через нарратив — чарт следует за повествованием"
@@ -226,6 +226,7 @@ export function TimelineSection({
                       dataKey="escalationIndex"
                       stroke="url(#phaseGradientDesktop)"
                       strokeWidth={2.5}
+                      strokeDasharray="6 4"
                       isAnimationActive={false}
                       dot={(props: Record<string, unknown>) => {
                         const { cx, cy, index } = props as { cx: number; cy: number; index: number };
@@ -319,6 +320,7 @@ export function TimelineSection({
                   dataKey="escalationIndex"
                   stroke="url(#phaseGradientMobile)"
                   strokeWidth={2}
+                  strokeDasharray="6 4"
                   isAnimationActive={false}
                   dot={(props: Record<string, unknown>) => {
                     const { cx, cy, index } = props as { cx: number; cy: number; index: number };

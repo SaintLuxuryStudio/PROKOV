@@ -50,18 +50,16 @@ export function HeroSection() {
         </p>
 
         {/* Meta grid */}
-        <div className="mt-8 grid gap-3 sm:grid-cols-3">
+        <div className="mt-8 grid gap-3 sm:grid-cols-2">
           <MetaDatum label="Период" value={caseData.meta.period} />
           <MetaDatum label="География" value={caseData.meta.geography} />
-          <MetaDatum label="Индекс угрозы" value="100 / 100" highlight />
         </div>
 
         {/* Animated counters */}
-        <div className="mt-10 grid grid-cols-2 gap-6 sm:grid-cols-4">
+        <div className="mt-10 grid grid-cols-2 gap-6 sm:grid-cols-3">
           <AnimatedCounter end={9} label="Инцидентов" />
           <AnimatedCounter end={18} label="Улик" />
-          <AnimatedCounter end={6} label="Сущностей" />
-          <AnimatedCounter end={100} label="Индекс угрозы" suffix="/100" />
+          <AnimatedCounter end={6} label="Человек" />
         </div>
 
         {/* Phase bar */}

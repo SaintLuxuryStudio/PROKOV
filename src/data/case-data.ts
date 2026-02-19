@@ -208,7 +208,10 @@ export const caseData: CaseData = {
       description: "Подтверждение эпизода избиения, утраты техники и последующего ухода субъекта в уличную среду.",
       sourceRef: "Сводка дежурной группы, секция B",
       confidence: 0.81,
-      linkedIncidentIds: ["inc-02"]
+      linkedIncidentIds: ["inc-02"],
+      media: [
+        { url: "/assets/evidence/photo/ПРОТ-02.jpg", kind: "image" }
+      ]
     },
     {
       id: "ev-04",
@@ -277,7 +280,10 @@ export const caseData: CaseData = {
       description: "Сцена с кровью и фрагментарным светом в ванной как индикатор пост-насильственной дезорганизации.",
       sourceRef: "Аналитическое заключение №4",
       confidence: 0.84,
-      linkedIncidentIds: ["inc-05"]
+      linkedIncidentIds: ["inc-05"],
+      media: [
+        { url: "/assets/evidence/photo/ДОК-05.jpg", kind: "image" }
+      ]
     },
     {
       id: "ev-10",
@@ -322,7 +328,10 @@ export const caseData: CaseData = {
       description: "Описание ударов веслом и последующего принуждения в палатке по аудиоданным.",
       sourceRef: "Сводка экспертной группы F",
       confidence: 0.79,
-      linkedIncidentIds: ["inc-07"]
+      linkedIncidentIds: ["inc-07"],
+      media: [
+        { url: "/assets/evidence/photo/ДОК-07.jpg", kind: "image" }
+      ]
     },
     {
       id: "ev-14",
@@ -344,7 +353,12 @@ export const caseData: CaseData = {
       description: "Закрепление ритуального мотива сердца как повторяемого триггера перед насилием.",
       sourceRef: "Криминалистический профайл, раздел 5",
       confidence: 0.86,
-      linkedIncidentIds: ["inc-08"]
+      linkedIncidentIds: ["inc-08"],
+      media: [
+        { url: "/assets/evidence/photo/ДОК-08.jpg", kind: "image" },
+        { url: "/assets/evidence/photo/ДОК-08 (2).jpg", kind: "image" },
+        { url: "/assets/evidence/photo/ДОК-08 (3).jpg", kind: "image" }
+      ]
     },
     {
       id: "ev-16",
@@ -365,7 +379,10 @@ export const caseData: CaseData = {
       description: "Сцена за столом с демонстративным поеданием тканей и психологическим давлением на связанную потерпевшую.",
       sourceRef: "Криминалистический профайл, раздел 7",
       confidence: 0.89,
-      linkedIncidentIds: ["inc-09"]
+      linkedIncidentIds: ["inc-09"],
+      media: [
+        { url: "/assets/evidence/photo/ДОК-09.jpg", kind: "image" }
+      ]
     },
     {
       id: "ev-18",
