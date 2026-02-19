@@ -26,15 +26,15 @@ export function GeographySection({
       <div className="case-panel mt-5 rounded-2xl p-4 sm:p-6">
         {/* Map container with noir filter */}
         <div className="leaflet-noir-wrapper noise-texture relative overflow-hidden rounded-xl border border-white/8">
-          {/* Dark overlay */}
-          <div className="pointer-events-none absolute inset-0 z-[500] bg-ink-950/25" />
-          {/* Grid overlay */}
-          <div className="case-grid-bg pointer-events-none absolute inset-0 z-[501] opacity-[0.04]" />
+          {/* Dark overlay (lightened) */}
+          <div className="pointer-events-none absolute inset-0 z-[500] bg-ink-950/10" />
+          {/* Grid overlay (more visible) */}
+          <div className="case-grid-bg pointer-events-none absolute inset-0 z-[501] opacity-[0.08]" />
           {/* Corner coordinates */}
-          <div className="pointer-events-none absolute left-3 top-3 z-[502] font-mono text-[9px] text-white/20">
+          <div className="pointer-events-none absolute left-3 top-3 z-[502] font-mono text-[9px] text-white/40">
             48.89°N 2.10°E
           </div>
-          <div className="pointer-events-none absolute bottom-3 right-3 z-[502] font-mono text-[9px] text-white/20">
+          <div className="pointer-events-none absolute bottom-3 right-3 z-[502] font-mono text-[9px] text-white/40">
             48.80°N 2.40°E
           </div>
 

@@ -6,7 +6,6 @@ import { caseData } from "@/src/data/case-data";
 const quickSections = [
   { id: "timeline", label: "Таймлайн" },
   { id: "geography", label: "Карта" },
-  { id: "links", label: "Связи" },
   { id: "evidence", label: "Улики" },
   { id: "versions", label: "Версии" },
   { id: "conclusion", label: "Заключение" }

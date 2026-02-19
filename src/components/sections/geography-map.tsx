@@ -19,7 +19,7 @@ function makeIcon(color: string, index: number) {
       <div class="incident-marker" style="--marker-color: ${color}">
         <span class="incident-marker-pulse" style="background: ${color}"></span>
         <span class="incident-marker-dot" style="background: ${color}; border-color: ${color}"></span>
-        <span class="incident-marker-label">${String(index + 1).padStart(2, "0")}</span>
+        <span class="incident-marker-label" style="color: #e8eef8; text-shadow: 0 1px 2px rgba(0,0,0,0.6);">${String(index + 1).padStart(2, "0")}</span>
       </div>
     `
   });
@@ -30,16 +30,32 @@ export default function GeographyMap({
 }: {
   onSelectIncident: (id: string) => void;
 }) {
+  // Slightly jitter points 4-9 to avoid a perfect line while keeping westward drift
+  const jittered = useMemo(
+    () =>
+      parisLocations.map((loc, i) => {
+        if (i < 3) return loc;
+        const latJitter = (Math.random() - 0.5) * 0.008; // ~0.008 deg lat ≈ <1km
+        const lngJitter = (Math.random() - 0.5) * 0.06;  // more spread west/east ≈ ~4km
+        return {
+          ...loc,
+          lat: loc.lat + latJitter,
+          lng: loc.lng + lngJitter
+        };
+      }),
+    []
+  );
+
   /* Build polyline positions */
   const polyPositions: [number, number][] = useMemo(
-    () => parisLocations.map((loc) => [loc.lat, loc.lng]),
-    []
+    () => jittered.map((loc) => [loc.lat, loc.lng]),
+    [jittered]
   );
 
   /* Build icons (memoized) */
   const icons = useMemo(
-    () => parisLocations.map((loc, i) => makeIcon(phaseColor[loc.phase], i)),
-    []
+    () => jittered.map((loc, i) => makeIcon(phaseColor[loc.phase], i)),
+    [jittered]
   );
 
   return (
@@ -63,14 +79,14 @@ export default function GeographyMap({
       <Polyline
         positions={polyPositions}
         pathOptions={{
-          color: "rgba(142, 27, 27, 0.35)",
-          weight: 1.5,
-          dashArray: "6 4"
+          color: "rgba(200, 80, 80, 0.6)",
+          weight: 2.2,
+          dashArray: "8 5"
         }}
       />
 
       {/* Incident markers */}
-      {parisLocations.map((loc, i) => (
+      {jittered.map((loc, i) => (
         <Marker
           key={loc.incidentId}
           position={[loc.lat, loc.lng]}

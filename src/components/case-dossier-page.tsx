@@ -10,7 +10,6 @@ import { HeroSection } from "@/src/components/sections/hero-section";
 import { NavBar } from "@/src/components/sections/nav-bar";
 import { TimelineSection } from "@/src/components/sections/timeline-section";
 import { GeographySection } from "@/src/components/sections/geography-section";
-import { GraphSection } from "@/src/components/sections/graph-section";
 import { EvidenceSection } from "@/src/components/sections/evidence-section";
 import { HypothesesSection } from "@/src/components/sections/hypotheses-section";
 import { ConclusionSection } from "@/src/components/sections/conclusion-section";
@@ -74,10 +73,6 @@ export function CaseDossierPage() {
         <NavBar />
         <TimelineSection onSelectIncident={setSelectedIncidentId} />
         <GeographySection onSelectIncident={setSelectedIncidentId} />
-        <GraphSection
-          onSelectIncident={setSelectedIncidentId}
-          onSelectEvidence={setSelectedEvidenceId}
-        />
         <EvidenceSection
           onSelectEvidence={setSelectedEvidenceId}
           onOpenSource={openSource}
