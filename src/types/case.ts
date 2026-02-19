@@ -39,6 +39,12 @@ export interface Evidence {
   sourceRef: string;
   confidence: number;
   linkedIncidentIds: string[];
+  media?: EvidenceMedia[];
+}
+
+export interface EvidenceMedia {
+  url: string;
+  kind: "video" | "image";
 }
 
 export interface TimelinePoint {

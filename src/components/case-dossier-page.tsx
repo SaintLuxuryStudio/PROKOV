@@ -121,6 +121,31 @@ export function CaseDossierPage() {
               <Field label="Связано инцидентов" value={String(selectedEvidence.linkedIncidentIds.length)} />
             </div>
             <p className="leading-relaxed text-ink-200">{selectedEvidence.description}</p>
+
+            {selectedEvidence.media?.length ? (
+              <div className="space-y-2">
+                <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-ink-500">Медиа</p>
+                <div className="flex flex-col gap-3">
+                  {selectedEvidence.media.map((item) => (
+                    <div key={item.url} className="overflow-hidden rounded-lg border border-white/8 bg-white/[0.02] p-2">
+                      {item.kind === "image" ? (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img src={item.url} alt={selectedEvidence.code} className="w-full rounded-md" />
+                      ) : (
+                        <video
+                          src={item.url}
+                          controls
+                          className="w-full rounded-md"
+                          preload="metadata"
+                        />
+                      )}
+                      <p className="mt-1 font-mono text-[10px] text-ink-500 break-words">{item.url}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ) : null}
+
             <div className="space-y-2">
               <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-ink-500">Связанные эпизоды</p>
               {selectedEvidence.linkedIncidentIds.map((incidentId) => {

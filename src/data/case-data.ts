@@ -179,10 +179,14 @@ export const caseData: CaseData = {
       id: "ev-01",
       code: "ДОК-01",
       type: "видеофрагмент",
-      description: "Ранние дневные записи с туристических точек, демонстрируют поведенческую наивность и идеализацию среды.",
+      description:
+        "Ранние дневные записи с туристических точек, демонстрируют поведенческую наивность и идеализацию среды.",
       sourceRef: "Архивная папка A, кассеты 1-2",
       confidence: 0.92,
-      linkedIncidentIds: ["inc-01"]
+      linkedIncidentIds: ["inc-01"],
+      media: [
+        { url: "/assets/evidence/video/ДОК-01.mp4", kind: "video" }
+      ]
     },
     {
       id: "ev-02",
@@ -191,7 +195,11 @@ export const caseData: CaseData = {
       description: "Фрагменты уличных интервью с прохожими и фиксируемыми случаями насмешек/дистанцирования от субъекта.",
       sourceRef: "Стенограмма расшифровки канала микрофона",
       confidence: 0.88,
-      linkedIncidentIds: ["inc-01"]
+      linkedIncidentIds: ["inc-01"],
+      media: [
+        { url: "/assets/evidence/video/ПРОТ-01.mp4", kind: "video" },
+        { url: "/assets/evidence/video/ПРОТ-01 (2).mp4", kind: "video" }
+      ]
     },
     {
       id: "ev-03",
@@ -209,7 +217,10 @@ export const caseData: CaseData = {
       description: "Ночная запись с травмированным лицом субъекта и дезориентированными монологами.",
       sourceRef: "Архивная папка B, кассета 4",
       confidence: 0.9,
-      linkedIncidentIds: ["inc-02"]
+      linkedIncidentIds: ["inc-02"],
+      media: [
+        { url: "/assets/evidence/video/ДОК-03.mp4", kind: "video" }
+      ]
     },
     {
       id: "ev-05",
@@ -218,7 +229,10 @@ export const caseData: CaseData = {
       description: "Публичный копрологический инцидент с последующим физическим контактом с потерпевшим.",
       sourceRef: "Архивная папка C, кассета 6",
       confidence: 0.97,
-      linkedIncidentIds: ["inc-03"]
+      linkedIncidentIds: ["inc-03"],
+      media: [
+        { url: "/assets/evidence/video/ПРОТ-03.mp4", kind: "video" }
+      ]
     },
     {
       id: "ev-06",
@@ -227,7 +241,10 @@ export const caseData: CaseData = {
       description: "Краткий ночной эпизод с ударом ножом со спины и последующим бегством.",
       sourceRef: "Архивная папка C, кассета 7",
       confidence: 0.85,
-      linkedIncidentIds: ["inc-04"]
+      linkedIncidentIds: ["inc-04"],
+      media: [
+        { url: "/assets/evidence/video/ПРОТ-04.mp4", kind: "video" }
+      ]
     },
     {
       id: "ev-07",
@@ -236,7 +253,10 @@ export const caseData: CaseData = {
       description: "Нормализация ношения ножа, проговаривание насилия как инструмента выживания.",
       sourceRef: "Аналитическое заключение №2",
       confidence: 0.76,
-      linkedIncidentIds: ["inc-04"]
+      linkedIncidentIds: ["inc-04"],
+      media: [
+        { url: "/assets/evidence/photo/ДОК-04.jpg", kind: "image" }
+      ]
     },
     {
       id: "ev-08",
@@ -245,7 +265,10 @@ export const caseData: CaseData = {
       description: "Трекинг потерпевшей от лифта до двери, насильственное проникновение, аудио борьбы.",
       sourceRef: "Архивная папка D, кассета 9",
       confidence: 0.93,
-      linkedIncidentIds: ["inc-05"]
+      linkedIncidentIds: ["inc-05"],
+      media: [
+        { url: "/assets/evidence/video/ПРОТ-05.mp4", kind: "video" }
+      ]
     },
     {
       id: "ev-09",
@@ -263,7 +286,10 @@ export const caseData: CaseData = {
       description: "Проникновение в дом пожилой пары и манипуляции с дыхательной аппаратурой лежачей женщины.",
       sourceRef: "Архивная папка D, кассета 11",
       confidence: 0.95,
-      linkedIncidentIds: ["inc-06"]
+      linkedIncidentIds: ["inc-06"],
+      media: [
+        { url: "/assets/evidence/video/ПРОТ-06.mp4", kind: "video" }
+      ]
     },
     {
       id: "ev-11",
@@ -272,7 +298,10 @@ export const caseData: CaseData = {
       description: "Сопоставление времени эпизода с локальными сообщениями о проникновении в частный дом.",
       sourceRef: "Районный журнал вызовов",
       confidence: 0.67,
-      linkedIncidentIds: ["inc-06"]
+      linkedIncidentIds: ["inc-06"],
+      media: [
+        { url: "/assets/evidence/photo/ДОК-06.jpg", kind: "image" }
+      ]
     },
     {
       id: "ev-12",
@@ -281,7 +310,10 @@ export const caseData: CaseData = {
       description: "Слежка за парой у реки днем и ночной возврат для атаки.",
       sourceRef: "Архивная папка E, кассеты 13-14",
       confidence: 0.94,
-      linkedIncidentIds: ["inc-07"]
+      linkedIncidentIds: ["inc-07"],
+      media: [
+        { url: "/assets/evidence/video/ПРОТ-07.mp4", kind: "video" }
+      ]
     },
     {
       id: "ev-13",
@@ -299,7 +331,11 @@ export const caseData: CaseData = {
       description: "Серия эпизодов с горящими знаками сердца, животными останками и поджогами.",
       sourceRef: "Архивная папка F, кассеты 15-17",
       confidence: 0.91,
-      linkedIncidentIds: ["inc-08"]
+      linkedIncidentIds: ["inc-08"],
+      media: [
+        { url: "/assets/evidence/video/ПРОТ-08.mp4", kind: "video" },
+        { url: "/assets/evidence/video/ПРОТ-08 (2).mp4", kind: "video" }
+      ]
     },
     {
       id: "ev-15",
@@ -317,7 +353,10 @@ export const caseData: CaseData = {
       description: "Домашнее вторжение: нападение на супругов, блокировка ребенка и поджог конструкции.",
       sourceRef: "Архивная папка G, кассета 18",
       confidence: 0.96,
-      linkedIncidentIds: ["inc-09"]
+      linkedIncidentIds: ["inc-09"],
+      media: [
+        { url: "/assets/evidence/video/ПРОТ-09.mp4", kind: "video" }
+      ]
     },
     {
       id: "ev-17",
@@ -335,7 +374,10 @@ export const caseData: CaseData = {
       description: "Финальные кадры: кровь в раковине, волосы, попытка отмывания рук и прерванная запись.",
       sourceRef: "Архивная папка G, хвостовой фрагмент",
       confidence: 0.93,
-      linkedIncidentIds: ["inc-09"]
+      linkedIncidentIds: ["inc-09"],
+      media: [
+        { url: "/assets/evidence/video/ДОК-10.mp4", kind: "video" }
+      ]
     }
   ],
   timeline: [
