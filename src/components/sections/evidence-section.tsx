@@ -31,7 +31,7 @@ export function EvidenceSection({
   );
 
   return (
-    <motion.section id="evidence" className="mt-12" {...sectionAnimation}>
+    <motion.section id="evidence" className="mt-12" initial={{ opacity: 1, y: 0 }} animate={{ opacity: 1, y: 0 }}>
       <SectionTitle title="Каталог улик" subtitle="Фильтрация по типу и степени уверенности" />
 
       <div className="case-panel mt-5 rounded-2xl p-5 sm:p-6">
