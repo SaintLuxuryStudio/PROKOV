@@ -1,0 +1,436 @@
+@import "reactflow/dist/style.css";
+@import "leaflet/dist/leaflet.css";
+@import "@fontsource-variable/inter";
+@import "@fontsource-variable/playfair-display";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-0: #0a0a0a;
+  --bg-1: #0f0f0f;
+  --bg-2: #141414;
+  --text-0: #ededed;
+  --text-1: #a9a9a9;
+  --accent: #8e1b1b;
+  --phase-tourist: #2d6a4f;
+  --phase-vagrant: #b08d3e;
+  --phase-psychosis: #8e1b1b;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  scroll-behavior: smooth;
+  background: var(--bg-0);
+  color: var(--text-0);
+}
+
+body {
+  font-family: "Inter Variable", "Inter", "Segoe UI", "Helvetica Neue", sans-serif;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4 {
+  font-family: "Playfair Display Variable", "Playfair Display", "Palatino Linotype", serif;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+/* === CASE PANEL (base surface) === */
+.case-panel {
+  background: rgba(17, 17, 17, 0.82);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+}
+
+/* === GRID BACKGROUND === */
+.case-grid-bg {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+/* === SCROLLBAR === */
+.case-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.35) transparent;
+}
+
+.case-scrollbar::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.case-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.35);
+  border-radius: 999px;
+}
+
+.case-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* === REACTFLOW OVERRIDES === */
+.react-flow__node {
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: #181818;
+  color: #ededed;
+  font-size: 12px;
+  padding: 8px 10px;
+}
+
+.react-flow__edge-path {
+  stroke: rgba(255, 255, 255, 0.32);
+  stroke-width: 1.4;
+}
+
+.react-flow__controls {
+  background: rgba(8, 8, 8, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.react-flow__controls-button {
+  background: rgba(21, 21, 21, 0.92);
+  color: #ededed;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.react-flow__attribution {
+  background: transparent;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+/* === FULL-BLEED BACKGROUND WITH LAYERS === */
+.page-bg {
+  background:
+    radial-gradient(ellipse at 15% 8%, rgba(142, 27, 27, 0.06), transparent 50%),
+    radial-gradient(ellipse at 85% 15%, rgba(255, 255, 255, 0.03), transparent 40%),
+    repeating-linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.015),
+      rgba(255, 255, 255, 0.015) 1px,
+      transparent 1px,
+      transparent 40px
+    ),
+    var(--bg-0);
+}
+
+/* === FORENSIC STAMP === */
+.stamp {
+  display: inline-block;
+  border: 2px dashed rgba(142, 27, 27, 0.6);
+  border-radius: 6px;
+  padding: 4px 14px;
+  font-family: "JetBrains Mono", "Fira Code", monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-size: 0.7rem;
+  transform: rotate(-2deg);
+  color: rgba(142, 27, 27, 0.85);
+}
+
+.stamp-lg {
+  display: inline-block;
+  border: 3px dashed rgba(142, 27, 27, 0.5);
+  border-radius: 8px;
+  padding: 8px 24px;
+  font-family: "JetBrains Mono", "Fira Code", monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 1rem;
+  transform: rotate(-3deg);
+  color: rgba(142, 27, 27, 0.9);
+  font-weight: 700;
+}
+
+/* === REDACTED TEXT === */
+.redacted {
+  background: var(--bg-1);
+  color: transparent;
+  user-select: none;
+  padding: 0 4px;
+  border-radius: 1px;
+  display: inline-block;
+}
+
+/* === PULL QUOTE === */
+.pull-quote {
+  font-family: "Playfair Display Variable", "Playfair Display", serif;
+  font-style: italic;
+  font-size: 1.35rem;
+  line-height: 1.5;
+  border-left: 3px solid var(--accent);
+  padding-left: 1.25rem;
+  margin: 2rem 0;
+  color: rgba(237, 237, 237, 0.85);
+}
+
+/* === DROP CAP === */
+.drop-cap::first-letter {
+  font-family: "Playfair Display Variable", "Playfair Display", serif;
+  float: left;
+  font-size: 3.8em;
+  line-height: 0.8;
+  margin-right: 0.08em;
+  margin-top: 0.05em;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+/* === PHASE BACKGROUNDS === */
+.phase-bg-tourist {
+  background: linear-gradient(135deg, rgba(45, 106, 79, 0.06), transparent 60%);
+}
+.phase-bg-vagrant {
+  background: linear-gradient(135deg, rgba(176, 141, 62, 0.06), transparent 60%);
+}
+.phase-bg-psychosis {
+  background: linear-gradient(135deg, rgba(142, 27, 27, 0.08), transparent 60%);
+}
+
+/* === SCAN LINE EFFECT === */
+.scan-line-overlay {
+  position: relative;
+  overflow: hidden;
+}
+.scan-line-overlay::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(142,27,27,0.25), transparent);
+  animation: scanLine 5s linear infinite;
+  pointer-events: none;
+}
+
+/* === CONFIDENCE BAR === */
+.confidence-bar {
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+}
+.confidence-bar-fill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.6s ease-out;
+}
+
+/* === EVIDENCE TYPE COLORS === */
+.ev-type-video { border-top-color: #3b82f6; }
+.ev-type-behavioral { border-top-color: #8b5cf6; }
+.ev-type-testimony { border-top-color: #10b981; }
+.ev-type-operative { border-top-color: #f59e0b; }
+
+/* === NOISE TEXTURE OVERLAY === */
+.noise-texture {
+  position: relative;
+}
+.noise-texture::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='256' height='256' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  background-size: 128px 128px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* === ANIMATED UNDERLINE === */
+.animated-underline {
+  background-image: linear-gradient(var(--accent), var(--accent));
+  background-size: 0% 2px;
+  background-position: left bottom;
+  background-repeat: no-repeat;
+  transition: background-size 0.3s ease;
+}
+.animated-underline:hover {
+  background-size: 100% 2px;
+}
+
+/* === SEVERITY DOT === */
+.severity-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+/* === WATERMARK === */
+.watermark {
+  position: absolute;
+  font-family: "Playfair Display Variable", "Playfair Display", serif;
+  font-size: 14rem;
+  font-weight: 900;
+  color: rgba(255, 255, 255, 0.025);
+  transform: rotate(-12deg);
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+  z-index: 0;
+}
+
+/* === DOCUMENT CARD === */
+.document-card {
+  background: rgba(20, 20, 18, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 3px solid;
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+}
+
+.document-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0.015;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='256' height='256' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  background-size: 128px 128px;
+  pointer-events: none;
+}
+
+/* === PHASE DIVIDER === */
+.phase-divider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem 0;
+}
+.phase-divider::before,
+.phase-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: repeating-linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.15),
+    rgba(255, 255, 255, 0.15) 6px,
+    transparent 6px,
+    transparent 12px
+  );
+}
+
+/* === LEAFLET DARK THEME === */
+.leaflet-noir-wrapper {
+  position: relative;
+}
+
+.leaflet-noir-map {
+  background: #0a0a0a;
+  filter: brightness(0.7) contrast(1.2) saturate(0.3);
+}
+
+.leaflet-noir-map .leaflet-tile-pane {
+  opacity: 0.92;
+}
+
+/* Hide default leaflet controls */
+.leaflet-noir-map .leaflet-control-attribution {
+  display: none;
+}
+
+/* Custom incident marker */
+.incident-marker-wrapper {
+  background: transparent !important;
+  border: none !important;
+}
+
+.incident-marker {
+  position: relative;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.incident-marker-pulse {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  opacity: 0.2;
+  animation: markerPulse 2.5s ease-in-out infinite;
+}
+
+.incident-marker-dot {
+  position: relative;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid;
+  box-shadow: 0 0 8px var(--marker-color, rgba(142, 27, 27, 0.5));
+  z-index: 2;
+}
+
+.incident-marker-label {
+  position: absolute;
+  top: -4px;
+  right: -6px;
+  font-family: "JetBrains Mono", "Fira Code", monospace;
+  font-size: 8px;
+  color: rgba(255, 255, 255, 0.6);
+  letter-spacing: 0.05em;
+  z-index: 3;
+}
+
+@keyframes markerPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.2;
+  }
+  50% {
+    transform: scale(1.6);
+    opacity: 0.05;
+  }
+}
+
+/* Noir tooltip */
+.leaflet-tooltip-noir {
+  background: rgba(15, 15, 15, 0.95) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  border-radius: 6px !important;
+  color: #ededed !important;
+  padding: 6px 10px !important;
+  font-family: "JetBrains Mono", "Fira Code", monospace !important;
+  font-size: 10px !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5) !important;
+}
+
+.leaflet-tooltip-noir::before {
+  border-top-color: rgba(15, 15, 15, 0.95) !important;
+}
+
+/* === REDUCED MOTION === */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .scan-line-overlay::after {
+    display: none;
+  }
+  .incident-marker-pulse {
+    animation: none;
+  }
+}
