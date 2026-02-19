@@ -17,6 +17,7 @@ export function BackgroundAudio() {
   const [canPlay, setCanPlay] = useState(false);
   const rafRef = useRef<number | null>(null);
   const targetVolumeRef = useRef(BASE_VOLUME);
+  const isMutedRef = useRef(false);
 
   // single global fade helper
   const fade = useMemo(
@@ -35,6 +36,8 @@ export function BackgroundAudio() {
     []
   );
 
+  const getEffectiveTarget = () => (isMutedRef.current ? 0 : targetVolumeRef.current);
+
   // Expose start method globally so DisclaimerModal can call it directly
   useEffect(() => {
     const startAudio = () => {
@@ -44,16 +47,26 @@ export function BackgroundAudio() {
       active
         .play()
         .then(() => {
-          fade(active, 0, targetVolumeRef.current, FADE_DURATION * 1000);
+          fade(active, 0, getEffectiveTarget(), FADE_DURATION * 1000);
           setCanPlay(true);
         })
         .catch(() => undefined);
     };
 
     (window as Window & { __startBackgroundAudio?: () => void }).__startBackgroundAudio = startAudio;
+    (window as Window & { __setBackgroundMute?: (mute: boolean) => void }).__setBackgroundMute = (mute: boolean) => {
+      isMutedRef.current = mute;
+      const active = currentRef.current === "a" ? audioA.current : audioB.current;
+      if (active) {
+        fade(active, active.volume, getEffectiveTarget(), 300);
+      }
+    };
+    (window as Window & { __getBackgroundMute?: () => boolean }).__getBackgroundMute = () => isMutedRef.current;
 
     return () => {
       delete (window as Window & { __startBackgroundAudio?: () => void }).__startBackgroundAudio;
+      delete (window as Window & { __setBackgroundMute?: (mute: boolean) => void }).__setBackgroundMute;
+      delete (window as Window & { __getBackgroundMute?: () => boolean }).__getBackgroundMute;
     };
   }, [fade]);
 
@@ -90,7 +103,7 @@ export function BackgroundAudio() {
         idle.currentTime = 0;
         idle.volume = 0;
         idle.play().catch(() => undefined);
-        fade(idle, 0, targetVolumeRef.current, FADE_DURATION * 1000);
+        fade(idle, 0, getEffectiveTarget(), FADE_DURATION * 1000);
         fade(active, active.volume, 0, FADE_DURATION * 1000);
         currentRef.current = current === "a" ? "b" : "a";
       }
@@ -120,7 +133,7 @@ export function BackgroundAudio() {
       targetVolumeRef.current = target;
       const active = currentRef.current === "a" ? audioA.current : audioB.current;
       if (active) {
-        fade(active, active.volume, target, DUCK_FADE_MS);
+        fade(active, active.volume, getEffectiveTarget(), DUCK_FADE_MS);
       }
     };
 

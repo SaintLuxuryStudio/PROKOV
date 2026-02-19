@@ -2,7 +2,8 @@
 
 import { useMemo, useState } from "react";
 
-import { ReadingProgressBar } from "@/src/components/ui/reading-progress-bar";
+import { ReadingProgressBar } from "./ui/reading-progress-bar";
+import { AudioToggleButton } from "./ui/audio-toggle-button";
 import { RecordDialog } from "@/src/components/ui/record-dialog";
 import { Field } from "@/src/components/ui/field";
 import { SeverityBadge } from "@/src/components/ui/severity-badge";
@@ -48,6 +49,7 @@ export function CaseDossierPage() {
   return (
     <>
       <ReadingProgressBar />
+      <AudioToggleButton />
 
       <main className="mx-auto max-w-[1300px] px-4 pb-24 pt-6 text-ink-100 sm:px-6 lg:px-8">
         {/* Author credit — top */}
