@@ -5,7 +5,9 @@ import { useEffect, useMemo, useRef, useState } from "react";
 const AUDIO_SRC = "/assets/Memory%20limitations%20in%20artificial%20intelligence.m4a";
 const FADE_DURATION = 4; // seconds
 const CROSSFADE_LEAD = 6; // seconds before end to start next track
-const TARGET_VOLUME = 0.1; // ~ -20 dB
+const BASE_VOLUME = 0.1; // ~ -20 dB
+const DUCK_VOLUME = 0.02; // ~ -35 dB
+const DUCK_FADE_MS = 800;
 
 export function BackgroundAudio() {
   const audioA = useRef<HTMLAudioElement | null>(null);
@@ -14,6 +16,7 @@ export function BackgroundAudio() {
   const durationRef = useRef<number | null>(null);
   const [canPlay, setCanPlay] = useState(false);
   const rafRef = useRef<number | null>(null);
+  const targetVolumeRef = useRef(BASE_VOLUME);
 
   // single global fade helper
   const fade = useMemo(
@@ -41,7 +44,7 @@ export function BackgroundAudio() {
       active
         .play()
         .then(() => {
-          fade(active, 0, TARGET_VOLUME, FADE_DURATION * 1000);
+          fade(active, 0, targetVolumeRef.current, FADE_DURATION * 1000);
           setCanPlay(true);
         })
         .catch(() => undefined);
@@ -87,7 +90,7 @@ export function BackgroundAudio() {
         idle.currentTime = 0;
         idle.volume = 0;
         idle.play().catch(() => undefined);
-        fade(idle, 0, TARGET_VOLUME, FADE_DURATION * 1000);
+        fade(idle, 0, targetVolumeRef.current, FADE_DURATION * 1000);
         fade(active, active.volume, 0, FADE_DURATION * 1000);
         currentRef.current = current === "a" ? "b" : "a";
       }
@@ -105,6 +108,44 @@ export function BackgroundAudio() {
       a.src = "";
       b.src = "";
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    };
+  }, [fade]);
+
+  // Ducking logic: when any <video> plays, lower volume; restore when none playing
+  useEffect(() => {
+    let playingCount = 0;
+
+    const applyDuck = () => {
+      const target = playingCount > 0 ? DUCK_VOLUME : BASE_VOLUME;
+      targetVolumeRef.current = target;
+      const active = currentRef.current === "a" ? audioA.current : audioB.current;
+      if (active) {
+        fade(active, active.volume, target, DUCK_FADE_MS);
+      }
+    };
+
+    const onPlay = (ev: Event) => {
+      if (ev.target instanceof HTMLVideoElement) {
+        playingCount += 1;
+        applyDuck();
+      }
+    };
+
+    const onPause = (ev: Event) => {
+      if (ev.target instanceof HTMLVideoElement) {
+        playingCount = Math.max(0, playingCount - 1);
+        applyDuck();
+      }
+    };
+
+    document.addEventListener("play", onPlay, true);
+    document.addEventListener("pause", onPause, true);
+    document.addEventListener("ended", onPause, true);
+
+    return () => {
+      document.removeEventListener("play", onPlay, true);
+      document.removeEventListener("pause", onPause, true);
+      document.removeEventListener("ended", onPause, true);
     };
   }, [fade]);
 
