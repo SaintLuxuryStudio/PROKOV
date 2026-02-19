@@ -47,12 +47,18 @@ export function GraphSection({
     const nodes: Node[] = [];
     const edges: Edge[] = [];
 
-    // Entity nodes
+    const entityCount = caseData.entities.length;
+    const incidentCount = caseData.incidents.length;
+    const evidenceCount = caseData.evidence.length;
+
+    // Entity nodes — left column, centered vertically
+    const entitySpacing = 130;
+    const entityStartY = Math.max(0, (incidentCount * 120 - entityCount * entitySpacing) / 2);
     caseData.entities.forEach((entity, index) => {
       nodes.push({
         id: entity.id,
         type: "entityNode",
-        position: { x: 0, y: 20 + index * 110 },
+        position: { x: 0, y: entityStartY + index * entitySpacing },
         data: {
           label: entity.name,
           role: entity.role,
@@ -62,12 +68,12 @@ export function GraphSection({
       });
     });
 
-    // Incident nodes
+    // Incident nodes — center column
     caseData.incidents.forEach((incident, index) => {
       nodes.push({
         id: incident.id,
         type: "incidentNode",
-        position: { x: 320, y: 10 + index * 100 },
+        position: { x: 350, y: 10 + index * 120 },
         data: {
           label: incident.title,
           phase: incident.phase,
@@ -82,21 +88,24 @@ export function GraphSection({
           id: `${entityId}-${incident.id}`,
           source: entityId,
           target: incident.id,
-          markerEnd: { type: MarkerType.ArrowClosed, color: ispsychosis ? "rgba(142,27,27,0.7)" : "rgba(200,200,200,0.4)" },
+          type: "smoothstep",
+          markerEnd: { type: MarkerType.ArrowClosed, color: ispsychosis ? "rgba(142,27,27,0.8)" : "rgba(200,200,200,0.5)" },
           style: {
-            stroke: ispsychosis ? "rgba(142,27,27,0.5)" : "rgba(200,200,200,0.2)",
-            strokeWidth: ispsychosis ? 1.8 : 1.2
-          }
+            stroke: ispsychosis ? "rgba(142,27,27,0.4)" : "rgba(200,200,200,0.15)",
+            strokeWidth: ispsychosis ? 2 : 1.2
+          },
+          animated: ispsychosis
         });
       });
     });
 
-    // Evidence nodes
+    // Evidence nodes — right column, spaced proportionally
+    const evSpacing = Math.max(70, (incidentCount * 120) / evidenceCount);
     caseData.evidence.forEach((entry, index) => {
       nodes.push({
         id: entry.id,
         type: "evidenceNode",
-        position: { x: 700, y: 10 + index * 80 },
+        position: { x: 760, y: 10 + index * evSpacing },
         data: {
           label: `${entry.code} ${entry.type}`,
           code: entry.code,
@@ -112,8 +121,9 @@ export function GraphSection({
           id: `${incidentId}-${entry.id}`,
           source: incidentId,
           target: entry.id,
-          markerEnd: { type: MarkerType.ArrowClosed, color: `${color}88` },
-          style: { stroke: `${color}44`, strokeWidth: 1.2 }
+          type: "smoothstep",
+          markerEnd: { type: MarkerType.ArrowClosed, color: `${color}99` },
+          style: { stroke: `${color}55`, strokeWidth: 1.4 }
         });
       });
     });
@@ -187,7 +197,7 @@ export function GraphSection({
       <div className="case-panel mt-5 rounded-2xl p-3 sm:p-5">
         <div className="grid gap-4 xl:grid-cols-[1.4fr_0.8fr]">
           {/* Graph */}
-          <div className="h-[700px] rounded-xl border border-white/8 bg-ink-950">
+          <div className="h-[800px] rounded-xl border border-white/8 bg-ink-950">
             <ReactFlow
               nodes={graph.nodes}
               edges={graph.edges}

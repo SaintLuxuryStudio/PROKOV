@@ -42,6 +42,21 @@ export function EvidenceDocumentCard({
           </span>
         </div>
 
+        {/* Media preview */}
+        {entry.media?.length ? (
+          <div className="mt-2 mb-3 overflow-hidden rounded-lg border border-white/8 bg-white/[0.02] p-1.5">
+            {entry.media[0].kind === "image" ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img src={encodeURI(entry.media[0].url)} alt={entry.code} className="w-full rounded-md" />
+            ) : (
+              <video src={encodeURI(entry.media[0].url)} controls preload="metadata" className="w-full rounded-md" />
+            )}
+            {entry.media.length > 1 && (
+              <p className="mt-1 text-center font-mono text-[9px] text-ink-500">+{entry.media.length - 1} ещё</p>
+            )}
+          </div>
+        ) : null}
+
         {/* Description */}
         <p className="mt-2 pr-12 text-sm leading-relaxed text-ink-200">{entry.description}</p>
 

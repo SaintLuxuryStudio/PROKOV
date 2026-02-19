@@ -8,12 +8,10 @@ import { Field } from "@/src/components/ui/field";
 import { SeverityBadge } from "@/src/components/ui/severity-badge";
 import { HeroSection } from "@/src/components/sections/hero-section";
 import { NavBar } from "@/src/components/sections/nav-bar";
-import { SummarySection } from "@/src/components/sections/summary-section";
 import { TimelineSection } from "@/src/components/sections/timeline-section";
 import { GeographySection } from "@/src/components/sections/geography-section";
 import { GraphSection } from "@/src/components/sections/graph-section";
 import { EvidenceSection } from "@/src/components/sections/evidence-section";
-import { ProfileSection } from "@/src/components/sections/profile-section";
 import { HypothesesSection } from "@/src/components/sections/hypotheses-section";
 import { ConclusionSection } from "@/src/components/sections/conclusion-section";
 
@@ -53,9 +51,27 @@ export function CaseDossierPage() {
       <ReadingProgressBar />
 
       <main className="mx-auto max-w-[1300px] px-4 pb-24 pt-6 text-ink-100 sm:px-6 lg:px-8">
+        {/* Author credit — top */}
+        <div className="mb-6 text-center">
+          <p className="text-sm text-ink-400">
+            сделано прекрасным{" "}
+            <a
+              href="https://t.me/serezha168"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 rounded-full border border-sky-500/30 bg-sky-500/10 px-3 py-1 font-semibold text-sky-400 transition hover:bg-sky-500/20 hover:text-sky-300"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" className="flex-shrink-0">
+                <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.479.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z" />
+              </svg>
+              serezha168
+            </a>
+            {" "}переходите в мой тг
+          </p>
+        </div>
+
         <HeroSection />
         <NavBar />
-        <SummarySection />
         <TimelineSection onSelectIncident={setSelectedIncidentId} />
         <GeographySection onSelectIncident={setSelectedIncidentId} />
         <GraphSection
@@ -66,9 +82,27 @@ export function CaseDossierPage() {
           onSelectEvidence={setSelectedEvidenceId}
           onOpenSource={openSource}
         />
-        <ProfileSection />
         <HypothesesSection />
         <ConclusionSection />
+
+        {/* Author credit — bottom */}
+        <div className="mt-12 text-center">
+          <p className="text-sm text-ink-400">
+            сделано прекрасным{" "}
+            <a
+              href="https://t.me/serezha168"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 rounded-full border border-sky-500/30 bg-sky-500/10 px-3 py-1 font-semibold text-sky-400 transition hover:bg-sky-500/20 hover:text-sky-300"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" className="flex-shrink-0">
+                <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.479.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z" />
+              </svg>
+              serezha168
+            </a>
+            {" "}переходите в мой тг
+          </p>
+        </div>
       </main>
 
       {/* Incident dialog */}
@@ -130,10 +164,10 @@ export function CaseDossierPage() {
                     <div key={item.url} className="overflow-hidden rounded-lg border border-white/8 bg-white/[0.02] p-2">
                       {item.kind === "image" ? (
                         // eslint-disable-next-line @next/next/no-img-element
-                        <img src={item.url} alt={selectedEvidence.code} className="w-full rounded-md" />
+                        <img src={encodeURI(item.url)} alt={selectedEvidence.code} className="w-full rounded-md" />
                       ) : (
                         <video
-                          src={item.url}
+                          src={encodeURI(item.url)}
                           controls
                           className="w-full rounded-md"
                           preload="metadata"

@@ -4,12 +4,10 @@ import { useActiveSection } from "@/src/components/hooks/use-active-section";
 import { caseData } from "@/src/data/case-data";
 
 const quickSections = [
-  { id: "summary", label: "Сводка" },
   { id: "timeline", label: "Таймлайн" },
   { id: "geography", label: "Карта" },
   { id: "links", label: "Связи" },
   { id: "evidence", label: "Улики" },
-  { id: "profile", label: "Профайл" },
   { id: "versions", label: "Версии" },
   { id: "conclusion", label: "Заключение" }
 ];

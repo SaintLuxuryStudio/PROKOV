@@ -7,8 +7,8 @@ import { parisLocations } from "@/src/data/paris-locations";
 import { phaseColor } from "@/src/lib/phase-colors";
 
 /* Compute map center between all points */
-const center: [number, number] = [48.840, 2.230];
-const defaultZoom = 12;
+const center: [number, number] = [48.840, 2.100];
+const defaultZoom = 11;
 
 function makeIcon(color: string, index: number) {
   return L.divIcon({
@@ -47,10 +47,10 @@ export default function GeographyMap({
       center={center}
       zoom={defaultZoom}
       zoomControl={false}
-      dragging={false}
-      scrollWheelZoom={false}
-      doubleClickZoom={false}
-      touchZoom={false}
+      dragging={true}
+      scrollWheelZoom={true}
+      doubleClickZoom={true}
+      touchZoom={true}
       attributionControl={false}
       className="leaflet-noir-map"
       style={{ height: 480, width: "100%" }}

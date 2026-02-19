@@ -18,6 +18,7 @@ import { PhaseDivider } from "@/src/components/ui/phase-divider";
 import { caseData } from "@/src/data/case-data";
 import { phaseColor, phaseLabel } from "@/src/lib/phase-colors";
 import { sectionAnimation } from "@/src/lib/animation-config";
+import type { EvidenceMedia } from "@/src/types/case";
 
 /* SVG gradient stops — one per timeline point, colored by phase */
 function PhaseGradientDefs({ id }: { id: string }) {
@@ -44,6 +45,7 @@ export function TimelineSection({
 }) {
   const [activeIndex, setActiveIndex] = useState(0);
   const narrativeRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const evidenceById = useMemo(() => new Map(caseData.evidence.map((e) => [e.id, e])), []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -105,6 +107,10 @@ export function TimelineSection({
             const idx = item.index!;
             const incident = caseData.incidents[idx];
             const isActive = idx === activeIndex;
+            const incidentMedia: EvidenceMedia[] = incident.linkedEvidenceIds
+              .map((eId) => evidenceById.get(eId))
+              .filter((e): e is NonNullable<typeof e> => Boolean(e && e.media?.length))
+              .flatMap((e) => e.media || []);
             return (
               <div
                 key={incident.id}
@@ -135,6 +141,24 @@ export function TimelineSection({
                 <div className="mt-4">
                   <SeverityBadge severity={incident.severity} />
                 </div>
+                {incidentMedia.length > 0 && (
+                  <div className="mt-4 space-y-2">
+                    <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-ink-500">Медиа улик</p>
+                    <div className="flex flex-col gap-2">
+                      {incidentMedia.map((m) => (
+                        <div key={`${incident.id}-${m.url}`} className="overflow-hidden rounded-lg border border-white/8 bg-white/[0.02] p-1.5">
+                          {m.kind === "image" ? (
+                            // eslint-disable-next-line @next/next/no-img-element
+                            <img src={encodeURI(m.url)} alt={incident.title} className="w-full rounded-md" />
+                          ) : (
+                            <video src={encodeURI(m.url)} controls preload="metadata" className="w-full rounded-md" />
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
                 <button
                   type="button"
                   onClick={() => onSelectIncident(incident.id)}
@@ -202,6 +226,7 @@ export function TimelineSection({
                       dataKey="escalationIndex"
                       stroke="url(#phaseGradientDesktop)"
                       strokeWidth={2.5}
+                      isAnimationActive={false}
                       dot={(props: Record<string, unknown>) => {
                         const { cx, cy, index } = props as { cx: number; cy: number; index: number };
                         const isActivePoint = index === activeIndex;
@@ -294,6 +319,7 @@ export function TimelineSection({
                   dataKey="escalationIndex"
                   stroke="url(#phaseGradientMobile)"
                   strokeWidth={2}
+                  isAnimationActive={false}
                   dot={(props: Record<string, unknown>) => {
                     const { cx, cy, index } = props as { cx: number; cy: number; index: number };
                     const pointPhase = caseData.timeline[index]?.phase;
