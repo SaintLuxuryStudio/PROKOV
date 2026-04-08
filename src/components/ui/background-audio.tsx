@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 
-const AUDIO_SRC = "/assets/Memory%20limitations%20in%20artificial%20intelligence.m4a";
+const AUDIO_SRC = "/assets/background-music.m4a";
 const FADE_DURATION = 4; // seconds
 const CROSSFADE_LEAD = 6; // seconds before end to start next track
 const BASE_VOLUME = 0.1; // ~ -20 dB

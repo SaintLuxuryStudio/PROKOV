@@ -185,7 +185,7 @@ export const caseData: CaseData = {
       confidence: 0.92,
       linkedIncidentIds: ["inc-01"],
       media: [
-        { url: "/assets/evidence/video/ДОК-01.mp4", kind: "video" }
+        { url: "/assets/evidence/video/DOK-01.mp4", kind: "video" }
       ]
     },
     {
@@ -197,8 +197,8 @@ export const caseData: CaseData = {
       confidence: 0.88,
       linkedIncidentIds: ["inc-01"],
       media: [
-        { url: "/assets/evidence/video/ПРОТ-01.mp4", kind: "video" },
-        { url: "/assets/evidence/video/ПРОТ-01 (2).mp4", kind: "video" }
+        { url: "/assets/evidence/video/PROT-01.mp4", kind: "video" },
+        { url: "/assets/evidence/video/PROT-01-2.mp4", kind: "video" }
       ]
     },
     {
@@ -210,7 +210,7 @@ export const caseData: CaseData = {
       confidence: 0.81,
       linkedIncidentIds: ["inc-02"],
       media: [
-        { url: "/assets/evidence/photo/ПРОТ-02.jpg", kind: "image" }
+        { url: "/assets/evidence/photo/PROT-02.jpg", kind: "image" }
       ]
     },
     {
@@ -222,7 +222,7 @@ export const caseData: CaseData = {
       confidence: 0.9,
       linkedIncidentIds: ["inc-02"],
       media: [
-        { url: "/assets/evidence/video/ДОК-03.mp4", kind: "video" }
+        { url: "/assets/evidence/video/DOK-03.mp4", kind: "video" }
       ]
     },
     {
@@ -234,7 +234,7 @@ export const caseData: CaseData = {
       confidence: 0.97,
       linkedIncidentIds: ["inc-03"],
       media: [
-        { url: "/assets/evidence/video/ПРОТ-03.mp4", kind: "video" }
+        { url: "/assets/evidence/video/PROT-03.mp4", kind: "video" }
       ]
     },
     {
@@ -246,7 +246,7 @@ export const caseData: CaseData = {
       confidence: 0.85,
       linkedIncidentIds: ["inc-04"],
       media: [
-        { url: "/assets/evidence/video/ПРОТ-04.mp4", kind: "video" }
+        { url: "/assets/evidence/video/PROT-04.mp4", kind: "video" }
       ]
     },
     {
@@ -258,7 +258,7 @@ export const caseData: CaseData = {
       confidence: 0.76,
       linkedIncidentIds: ["inc-04"],
       media: [
-        { url: "/assets/evidence/photo/ДОК-04.jpg", kind: "image" }
+        { url: "/assets/evidence/photo/DOK-04.jpg", kind: "image" }
       ]
     },
     {
@@ -270,7 +270,7 @@ export const caseData: CaseData = {
       confidence: 0.93,
       linkedIncidentIds: ["inc-05"],
       media: [
-        { url: "/assets/evidence/video/ПРОТ-05.mp4", kind: "video" }
+        { url: "/assets/evidence/video/PROT-05.mp4", kind: "video" }
       ]
     },
     {
@@ -282,7 +282,7 @@ export const caseData: CaseData = {
       confidence: 0.84,
       linkedIncidentIds: ["inc-05"],
       media: [
-        { url: "/assets/evidence/photo/ДОК-05.jpg", kind: "image" }
+        { url: "/assets/evidence/photo/DOK-05.jpg", kind: "image" }
       ]
     },
     {
@@ -294,7 +294,7 @@ export const caseData: CaseData = {
       confidence: 0.95,
       linkedIncidentIds: ["inc-06"],
       media: [
-        { url: "/assets/evidence/video/ПРОТ-06.mp4", kind: "video" }
+        { url: "/assets/evidence/video/PROT-06.mp4", kind: "video" }
       ]
     },
     {
@@ -306,7 +306,7 @@ export const caseData: CaseData = {
       confidence: 0.67,
       linkedIncidentIds: ["inc-06"],
       media: [
-        { url: "/assets/evidence/photo/ДОК-06.jpg", kind: "image" }
+        { url: "/assets/evidence/photo/DOK-06.jpg", kind: "image" }
       ]
     },
     {
@@ -318,7 +318,7 @@ export const caseData: CaseData = {
       confidence: 0.94,
       linkedIncidentIds: ["inc-07"],
       media: [
-        { url: "/assets/evidence/video/ПРОТ-07.mp4", kind: "video" }
+        { url: "/assets/evidence/video/PROT-07.mp4", kind: "video" }
       ]
     },
     {
@@ -330,7 +330,7 @@ export const caseData: CaseData = {
       confidence: 0.79,
       linkedIncidentIds: ["inc-07"],
       media: [
-        { url: "/assets/evidence/photo/ДОК-07.jpg", kind: "image" }
+        { url: "/assets/evidence/photo/DOK-07.jpg", kind: "image" }
       ]
     },
     {
@@ -342,8 +342,8 @@ export const caseData: CaseData = {
       confidence: 0.91,
       linkedIncidentIds: ["inc-08"],
       media: [
-        { url: "/assets/evidence/video/ПРОТ-08.mp4", kind: "video" },
-        { url: "/assets/evidence/video/ПРОТ-08 (2).mp4", kind: "video" }
+        { url: "/assets/evidence/video/PROT-08.mp4", kind: "video" },
+        { url: "/assets/evidence/video/PROT-08-2.mp4", kind: "video" }
       ]
     },
     {
@@ -355,9 +355,9 @@ export const caseData: CaseData = {
       confidence: 0.86,
       linkedIncidentIds: ["inc-08"],
       media: [
-        { url: "/assets/evidence/photo/ДОК-08.jpg", kind: "image" },
-        { url: "/assets/evidence/photo/ДОК-08 (2).jpg", kind: "image" },
-        { url: "/assets/evidence/photo/ДОК-08 (3).jpg", kind: "image" }
+        { url: "/assets/evidence/photo/DOK-08.jpg", kind: "image" },
+        { url: "/assets/evidence/photo/DOK-08-2.jpg", kind: "image" },
+        { url: "/assets/evidence/photo/DOK-08-3.jpg", kind: "image" }
       ]
     },
     {
@@ -369,7 +369,7 @@ export const caseData: CaseData = {
       confidence: 0.96,
       linkedIncidentIds: ["inc-09"],
       media: [
-        { url: "/assets/evidence/video/ПРОТ-09.mp4", kind: "video" }
+        { url: "/assets/evidence/video/PROT-09.mp4", kind: "video" }
       ]
     },
     {
@@ -381,7 +381,7 @@ export const caseData: CaseData = {
       confidence: 0.89,
       linkedIncidentIds: ["inc-09"],
       media: [
-        { url: "/assets/evidence/photo/ДОК-09.jpg", kind: "image" }
+        { url: "/assets/evidence/photo/DOK-09.jpg", kind: "image" }
       ]
     },
     {
@@ -393,7 +393,7 @@ export const caseData: CaseData = {
       confidence: 0.93,
       linkedIncidentIds: ["inc-09"],
       media: [
-        { url: "/assets/evidence/video/ДОК-10.mp4", kind: "video" }
+        { url: "/assets/evidence/video/DOK-10.mp4", kind: "video" }
       ]
     }
   ],
